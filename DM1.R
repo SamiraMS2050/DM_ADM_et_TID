@@ -122,9 +122,10 @@ hommes=c(24.2+56.2+89.8+138.0+43.4,79.2+258.4+387.2+378.7 +128.7,315.7+685.3+853
          834.7+915.7+755.9+123.7,476.0+449.5+416.0+329.8+58.3, 1085.8+1068.4+1065.5+
          987.9+130.1)
 sum(hommes)
-SEXE=data.frame(femmes,hommes)
-CS=data.frame(SEXE,categories)
-sum(CS[, sapply(CS, is.numeric)])
+CS<-matrix(c(femmes/somme,hommes/somme),nrow=2,byrow=TRUE)
+sum(CS)
+rownames(CS) <- c("F","H")
+colnames(CS) <- c("Agriculteurs",  "artisans","cadres","professionel","employés","ouvriers")
 View(CS)
 HAC=0
 for (i in c(1:6)){
@@ -142,10 +143,9 @@ for (i in c(1,2)){
 }
 HAS
 HCS=0
-for (i in c(1,6)){
-  for (j in 1:2) {
-    HCS<-HCS-(CS[i,j]/somme)*log(CS[i,j]/somme)
-      
+for (i in c(1,2)){
+  for (j in 1:6) {
+    HCS<-HCS-(CS[i,j])*log(CS[i,j])
   }
 }
 HCS
@@ -175,6 +175,13 @@ IC=IAC+ICS
 IA
 IS
 IC
+
+#représentation  des Entropies sur un tableau 
+Variables<- c("HS", "HA", "HC", "HAS","HCS","HAC","HCSA")
+Entropies <- c(HS,HA,HC,HAS,HCS,HAC,HSCA)
+tab <- data.frame(Variables, Entropies)
+# Afficher le tableau
+View(tab)
 #EXERCICE2
 # Créer la matrice avec les données
 tableau <- matrix(c(2, 6, 8, 5, 1, 
@@ -396,3 +403,17 @@ IYR_i <- c(0.101911, 0.06332095,0.02270417, 0.02270417)
 recodage_table <- data.frame(R_i, IYR_i)
 # Afficher le tableau
 View(recodage_table)
+#---------EXO3----------
+Espèce<-c(a,b,c,d,e,f,g,h,i,j)
+Comestible<-c()
+Chapeau Tige Couleur
+a o a e b
+b o a e j
+c o a e b
+d o pl f j
+e o pl f b
+f n po f r
+g n po f j
+h n po e r
+i n a f j
+j n pl f j
