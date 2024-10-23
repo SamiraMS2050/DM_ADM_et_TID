@@ -188,7 +188,7 @@ colnames(tableau) <- c("0%", "Entre 0 et 0.5%", "Entre 0.5 et 1%", "Entre 1 et 3
 # Afficher le tableau
 View(tableau)
 #4 recodage en deux classes
-#tableau Z1
+#tableau R1
 tableau1<-matrix(c(2,
                    6+8+5+1,27,10+8+5),
                  nrow=2,byrow=TRUE)
@@ -205,7 +205,7 @@ View(tableaup1)
 sum(tableaup1)
 HR1=-((29/72)*log(29/72)+(43/72)*log(43/72))
 HR1
-#tableau de Z2
+#tableau de R2
 tableau2<-matrix(c(8,
                    8+5+1,37,8+5),
                  nrow=2,byrow=TRUE)
@@ -248,7 +248,17 @@ rownames(tableaup4) <- c("p(j)")
 colnames(tableaup4) <- c("<=3%",  "> 3%")
 View(tableaup4)
 HR4=-((71/72)*log(71/72)+(1/72)*log(1/72))
-#recodage en 3 classes
+HR1
+HR2
+HR3
+HR4
+#representation sur un tableau 
+R_i <- c("R1", "R2", "R3", "R4")
+HR_i <- c(0.6741219, 0.6615632,0.4274973, 0.07319013)
+recodage2 <- data.frame(R_i, HR_i)
+# Afficher le tableau
+View(recodage2)
+#------------------recodage en 3 classes
 t1<-matrix(c(2,6,8+5+1,
             27,10,8+5),
           nrow=2,ncol=3,byrow=TRUE)
@@ -334,3 +344,55 @@ rownames(tp6) <- c("p(j)")
 colnames(tp6) <- c("<=0.5%",  "entre 0.5et 3%",">3%")
 View(tp6)
 H6=-((45/72)*log(45/72)+(26/72)*log(26/72)+(1/72)*log(1/72))
+H1
+H2
+H3
+H4
+H5
+H6
+#representation sur un tableau 
+T_i <- c("T1", "T2", "T3", "T4","T5", "T6")
+HT_i <- c(1.068325, 0.9150261, 0.4740389,1.0137227,0.7400869,0.7209672)
+recodage3 <- data.frame(T_i, HT_i)
+# Afficher le tableau
+View(recodage3)
+#---------------QUESTION (2)
+
+HYR1=0
+for (i in c(1,2)){
+  for (j in 1:2) {
+    HYR1<-HYR1-(tableau1[i,j]/72)*log(tableau1[i,j]/72)
+  }
+}
+
+HYR2=0
+for (i in c(1,2)){
+  for (j in 1:2) {
+    HYR2<-HYR2-(tableau2[i,j]/72)*log(tableau2[i,j]/72)
+  }
+}
+
+HYR3=0
+for (i in c(1,2)){
+  for (j in 1:2) {
+    HYR3<-HYR3-(tableau3[i,j]/72)*log(tableau3[i,j]/72)
+  }
+}
+
+HYR4<- -((50/72)*log(50/72)+(21/72)*log(21/72)+(1/72)*log(1/72))
+#calcul des informations mutuelles
+HY<- -((22/72)*log(22/72)+(50/72)*log(50/72))
+IYR1<-HY+HR1-HYR1
+IYR1
+IYR2
+IYR3
+IYR3
+IYR2<-HY+HR2-HYR2
+IYR3<-HY+HR3-HYR3
+IYR4<-HY+HR4-HYR4
+#représentation  des info mutuelles sur un tableau 
+R_i <- c("R1", "R2", "R3", "R4")
+IYR_i <- c(0.101911, 0.06332095,0.02270417, 0.02270417)
+recodage_table <- data.frame(R_i, IYR_i)
+# Afficher le tableau
+View(recodage_table)
