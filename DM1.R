@@ -202,8 +202,9 @@ tableaup1<-matrix(c((2+27)/72,
 rownames(tableaup1) <- c("p(j)")
 colnames(tableaup1) <- c("0%",  "> 0%")
 View(tableaup1)
-HZ1=-((29/72)*log(29/72)+(43/72)*log(43/72))
-HZ1
+sum(tableaup1)
+HR1=-((29/72)*log(29/72)+(43/72)*log(43/72))
+HR1
 #tableau de Z2
 tableau2<-matrix(c(8,
                    8+5+1,37,8+5),
@@ -218,7 +219,7 @@ tableaup2<-matrix(c((8+37)/72,
 rownames(tableaup2) <- c("p(j)")
 colnames(tableaup2) <- c("<=0.5%",  "> 0.5%")
 View(tableaup2)
-HZ2=-((45/72)*log(45/72)+(27/72)*log(27/72))
+HR2=-((45/72)*log(45/72)+(27/72)*log(27/72))
 tableau3<-matrix(c(16,
                    5+1,37+8,5),
                  nrow=2,byrow=TRUE)
@@ -233,7 +234,7 @@ tableaup3<-matrix(c(61/72,
 rownames(tableaup3) <- c("p(j)")
 colnames(tableaup3) <- c("<=1%",  "> 1%")
 View(tableaup3)
-HZ3=-((61/72)*log(61/72)+(11/72)*log(11/72))
+HR3=-((61/72)*log(61/72)+(11/72)*log(11/72))
 tableau4<-matrix(c(16+5,
                    1,37+8+5,0),
                  nrow=2,byrow=TRUE)
@@ -246,5 +247,90 @@ tableaup4<-matrix(c(71/72,
 rownames(tableaup4) <- c("p(j)")
 colnames(tableaup4) <- c("<=3%",  "> 3%")
 View(tableaup4)
-HZ4=-((71/72)*log(71/72)+(1/72)*log(1/72))
+HR4=-((71/72)*log(71/72)+(1/72)*log(1/72))
 #recodage en 3 classes
+t1<-matrix(c(2,6,8+5+1,
+            27,10,8+5),
+          nrow=2,ncol=3,byrow=TRUE)
+rownames(t1) <- c("Oui", "Non")
+colnames(t1) <- c("0%",  "Entre0 et 0.5%",">0.5")
+View(t1)
+#tableau avec les probas 
+tp1<-matrix(c(29/72,
+                    16/72,27/72),
+                  nrow=1,byrow=TRUE)
+rownames(tp1) <- c("p(j)")
+colnames(tp1) <- c("0%",  "Entre0 et 0.5%",">0.5")
+View(tp1)
+H1=-((29/72)*log(29/72)+(16/72)*log(16/72)+(27/72)*log(27/72))
+t2<-matrix(c(2+6,8,5+1,
+            27+10,8,5),
+          nrow=2,ncol=3,byrow=TRUE)
+rownames(t2) <- c("Oui", "Non")
+colnames(t2) <- c("<=0.5%",  "Entre0.5 et 1%",">1%")
+View(t2)
+#tableau avec les probas 
+tp2<-matrix(c(45/72,
+              16/72,11/72),
+            nrow=1,byrow=TRUE)
+rownames(tp2) <- c("p(j)")
+colnames(tp2) <- c("<=0.5%",  "Entre0.5 et 1%",">1%")
+View(tp2)
+H2=-((45/72)*log(45/72)+(16/72)*log(16/72)+(11/72)*log(11/72))
+t3<-matrix(c(2+6+8,5,1,
+             27+10+8,5,0),
+           nrow=2,ncol=3,byrow=TRUE)
+rownames(t3) <- c("Oui", "Non")
+colnames(t3) <- c("<=1%",  "Entre 1 et 3%",">3%")
+View(t3)
+#tableau avec les probas 
+tp3<-matrix(c(61/72,
+              10/72,1/72),
+            nrow=1,byrow=TRUE)
+rownames(tp3) <- c("p(j)")
+colnames(tp3) <- c("<=1%",  "Entre 1 et 3%",">3%")
+View(tp3)
+H3=-((61/72)*log(61/72)+(10/72)*log(10/72)+(1/72)*log(1/72))
+#T4
+t4<-matrix(c(2,6+8,5+1,
+             27,10+8,5+0),
+           nrow=2,ncol=3,byrow=TRUE)
+rownames(t4) <- c("Oui", "Non")
+colnames(t4) <- c("0%",  "<=1%",">1%")
+View(t4)
+#tableau avec les probas 
+tp4<-matrix(c(29/72,
+              32/72,11/72),
+            nrow=1,byrow=TRUE)
+rownames(tp4) <- c("p(j)")
+colnames(tp4) <- c("0%",  "<=1%",">1%")
+View(tp4)
+H4=-((29/72)*log(29/72)+(32/72)*log(32/72)+(11/72)*log(11/72))
+t5<-matrix(c(2,6+8+5,1,
+             27,10+8+5,0),
+           nrow=2,ncol=3,byrow=TRUE)
+rownames(t5) <- c("Oui", "Non")
+colnames(t5) <- c("0%",  "<=3%",">3%")
+View(t5)
+#tableau avec les probas 
+tp5<-matrix(c(29/72,
+              42/72,1/72),
+            nrow=1,byrow=TRUE)
+rownames(tp5) <- c("p(j)")
+colnames(tp5) <- c("0%",  "<=3%",">3%")
+View(tp5)
+H5=-((29/72)*log(29/72)+(42/72)*log(42/72)+(1/72)*log(1/72))
+t6<-matrix(c(2+6,8+5,1,
+             27+10,8+5,0),
+           nrow=2,ncol=3,byrow=TRUE)
+rownames(t6) <- c("Oui", "Non")
+colnames(t6) <- c("<=0.5%",  "entre 0.5et 3%",">3%")
+View(t6)
+#tableau avec les probas 
+tp6<-matrix(c(45/72,
+              26/72,1/72),
+            nrow=1,byrow=TRUE)
+rownames(tp6) <- c("p(j)")
+colnames(tp6) <- c("<=0.5%",  "entre 0.5et 3%",">3%")
+View(tp6)
+H6=-((45/72)*log(45/72)+(26/72)*log(26/72)+(1/72)*log(1/72))
