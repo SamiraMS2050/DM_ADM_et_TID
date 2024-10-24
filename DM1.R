@@ -42,8 +42,6 @@ categories <- c("Agriculteurs ", "Artisans, commerçants ",
                 "Cadres ", "Professions", "Employés", "Ouvriers")
 femme<- c(26476.9)
 homme <- c(13707.7)
-x<-log10(26476.9/40184.6)*26476.9/40184.6+log10(13707.7/40184.6)*13707.7/40184.6
-print(x)
 # Créer une table avec deux colonnes
 sexe <- data.frame("Hommes"=homme,"Femmes"=femme)
 s<-sum(sexe)
@@ -73,7 +71,7 @@ s4=sum(age[4,])
 s5=sum(age[5,])
 s6=sum(age[6,])
 colonne<-c(s1,s2,s3,s4,s5,s6)
-View(colonne)
+print(colonne)
 sum(age)
 x<-data.frame(categories,colonne)
 View(x)
@@ -87,6 +85,8 @@ sum(f)
 print(f)
 #calcul de hc
 #D'abord calculons les entropies de chacune des variables
+View(C1)
+nrow(C1)
 HC=0
 for (i in c(1:6)){
   HC<-HC-sum((x[i,2])/somme)*log(sum(x[i,2]/somme))
@@ -111,6 +111,7 @@ age_40_49FH<- c(119.6+556.1+1429.5+1895.0+1880.9+1362.7,89.8+387.2+853.2+915.7+4
 age_50_59FH <- c(187.1+525.8+1161.6+1507.8+1819.6+1300.4,138+378.7+719+755.9+329.8+987.9) 
 age_60_plusFH<- c(76.9+184.8+360.0+256.2+397.0+180.5,43.4+128.7+240.1+123.7+58.3+130.1)
 A<-data.frame(age_15_29FH,age_30_39FH,age_40_49FH,age_50_59FH,age_60_plusFH)
+A1<-c(age_15_29FH,age_30_39FH,age_40_49FH,age_50_59FH,age_60_plusFH)
 View(A)
 S=c("F","H")
 AS<-data.frame(S,A)
@@ -159,9 +160,9 @@ HSCA
 IAetCS=HA+HCS-HSCA
 ISetAC=HS+HAC-HSCA
 ICetAS=HC+HAS-HSCA
-IAetCS
-ISetAC
-ICetAS
+IAetCS/HA
+ISetAC/HS
+ICetAS/HC
 #l ionformation mutuelle de chaque couple
 IAS=HA+HS-HAS
 IAC=HA+HC-HAC
@@ -404,16 +405,46 @@ recodage_table <- data.frame(R_i, IYR_i)
 # Afficher le tableau
 View(recodage_table)
 #---------EXO3----------
-Espèce<-c(a,b,c,d,e,f,g,h,i,j)
-Comestible<-c()
-Chapeau Tige Couleur
-a o a e b
-b o a e j
-c o a e b
-d o pl f j
-e o pl f b
-f n po f r
-g n po f j
-h n po e r
-i n a f j
-j n pl f j
+Espèce<-c("a","b","c","d","e","f","g","h","i","j")
+Comestible<-c("o","o","o","o","o","n","n","n","n","n")
+Chapeau<-c("a","a","a","pl","pl","po","po","po","a","pl")
+Tige<-c("e","e","e","f","f","f","f","e","f","f")
+Couleur<-c("b","j","b","j","b","r","j","r","j","j")
+TAB<-data.frame(Espèce,Comestible,Chapeau,Tige,Couleur)
+View(TAB)
+m<-matrix(c(3,2,0,1,1,3),nrow=2,byrow=TRUE)
+rownames(m) <- c("oui","non")
+colnames(m) <- c("arrondi",  "plat","pointu")
+View(m)
+m1<-matrix(c(3,2,1,4),nrow=2,byrow=TRUE)
+rownames(m1) <- c("oui","non")
+colnames(m1) <- c("epaisse",  "fine")
+View(m1)
+m2<-matrix(c(3,2,0,0,3,2),nrow=2,byrow=TRUE)
+rownames(m2) <- c("oui","non")
+colnames(m2) <- c("brun",  "jaune_beige","rouge")
+View(m2)
+m3<-matrix(c(3,1,0,3,1,2),nrow=3,byrow=TRUE)
+rownames(m3) <- c("arrondi","plat","pointu")
+colnames(m3) <- c("epaisse",  "fine")
+View(m3)
+m4<-matrix(c(2,2,0,1,2,0,0,1,2),nrow=3,byrow=TRUE)
+rownames(m4) <- c("arrondi","plat","pointu")
+colnames(m4) <- c("brun",  "jaune_beige","rouge")
+View(m4)
+m5<-matrix(c(2,1,1,1,4,1),nrow=2,byrow=TRUE)
+colnames(m5) <- c("brun",  "jaune_beige","rouge")
+rownames(m5) <- c("epaisse",  "fine")
+View(m5)
+install.packages("infotheo")
+library(infotheo)
+
+# Exemple de deux variables
+# Calcul de l'information mutuelle
+mi <- mutinformation(discretize(f), discretize(colonne))
+print(mi)
+HC
+mi <- mutinformation(AC$categories, AC$age)
+print(mi)
+
+nrow(f)
