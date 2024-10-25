@@ -511,20 +511,46 @@ IX3a
 IX4a=IX3X4a+IX1X4a
 IX4a
 #on considere pointu
-m8<-matrix(c(0,1,0,2),nrow=2,byrow=TRUE)
+m8<-matrix(c(0,0,1,2),nrow=2,byrow=TRUE)
 rownames(m8) <- c("oui","non")
 colnames(m8) <- c("epaisse",  "fine")
-View(m8)
+print(m8)
 m9<-matrix(c(0,0,0,0,1,2),nrow=2,byrow=TRUE)
 rownames(m9) <- c("oui","non")
 colnames(m9) <- c("brun",  "jaune_beige","rouge")
 View(m9)
+m9a<-matrix(c(0,0,1,0,1,1),nrow=2,byrow=TRUE)
+colnames(m9a) <- c("brun",  "jaune_beige","rouge")
+rownames(m9a) <- c("epaisse",  "fine")
+print(m9a)
+
 #on considere plat 
-m10<-matrix(c(0,0,2,1),nrow=2,byrow=TRUE)
+m10<-matrix(c(0,2,0,1),nrow=2,byrow=TRUE)
 rownames(m10) <- c("oui","non")
 colnames(m10) <- c("epaisse",  "fine")
-View(m10)
+print(m10)
 m11<-matrix(c(1,1,0,0,1,0),nrow=2,byrow=TRUE)
 rownames(m11) <- c("oui","non")
 colnames(m11) <- c("brun",  "jaune_beige","rouge")
-View(m11)
+print(m11)
+m11a<-matrix(c(0,0,0,1,2,0),nrow=2,byrow=TRUE)
+colnames(m11a) <- c("brun",  "jaune_beige","rouge")
+rownames(m11a) <- c("epaisse",  "fine")
+print(m11a)
+HX1pl<- -(0.1*log(0.1)+0.2*log(0.2))
+HX3pl<- -(0.3*log(0.3))
+HX4pl<- -(0.1*log(0.1)+0.2*log(0.2))
+HX1X3pl<- -(0.2*log(0.2)+0.1*log(0.1))
+HX1X4pl<- -(0.3*log(0.1))
+HX3X4pl<- -(0.2*log(0.2)+0.1*log(0.1))
+IX1X3pl<-HX1pl+HX3pl-HX1X3pl
+IX1X4pl<-HX1pl+HX4pl-HX1X4pl
+IX3X4pl<-HX3pl+HX4pl-HX3X4pl
+IX1X4pl
+IX1X3pl
+IX1pl=IX1X4pl+IX1X3pl
+IX1pl
+IX3pl=IX3X4pl+IX1X3pl
+IX3pl
+IX4pl=IX3X4pl+IX1X4pl
+IX4pl
