@@ -85,8 +85,6 @@ sum(f)
 print(f)
 #calcul de hc
 #D'abord calculons les entropies de chacune des variables
-View(C1)
-nrow(C1)
 HC=0
 for (i in c(1:6)){
   HC<-HC-sum((x[i,2])/somme)*log(sum(x[i,2]/somme))
@@ -482,3 +480,51 @@ IX1
 IX2
 IX3
 IX4
+#on considere arrondi
+m6<-matrix(c(3,0,0,1),nrow=2,byrow=TRUE)
+rownames(m6) <- c("oui","non")
+colnames(m6) <- c("epaisse",  "fine")
+print(m6)
+m7<-matrix(c(2,1,0,0,1,0),nrow=2,byrow=TRUE)
+rownames(m7) <- c("oui","non")
+colnames(m7) <- c("brun",  "jaune_beige","rouge")
+print(m7)
+m8a<-matrix(c(2,1,0,0,1,0),nrow=2,byrow=TRUE)
+colnames(m8a) <- c("brun",  "jaune_beige","rouge")
+rownames(m8a) <- c("epaisse",  "fine")
+print(m8a)
+HX1a<- -(0.3*log(0.3)+0.1*log(0.1))
+HX3a<- -(0.3*log(0.3)+0.1*log(0.1))
+HX4a<- -(0.2*log(0.2)+0.2*log(0.2))
+HX1X3a<- -(0.3*log(0.3)+0.1*log(0.1))
+HX1X4a<- -(0.2*log(0.2)+0.2*log(0.1))
+HX3X4a<- -(0.2*log(0.2)+0.2*log(0.1))
+IX1X3a<-HX1a+HX3a-HX1X3a
+IX1X4a<-HX1a+HX4a-HX1X4a
+IX3X4a<-HX3a+HX4a-HX3X4a
+IX1X4a
+IX1X3a
+IX1a=IX1X4a+IX1X3a
+IX1a
+IX3a=IX3X4a+IX1X3a
+IX3a
+IX4a=IX3X4a+IX1X4a
+IX4a
+#on considere pointu
+m8<-matrix(c(0,1,0,2),nrow=2,byrow=TRUE)
+rownames(m8) <- c("oui","non")
+colnames(m8) <- c("epaisse",  "fine")
+View(m8)
+m9<-matrix(c(0,0,0,0,1,2),nrow=2,byrow=TRUE)
+rownames(m9) <- c("oui","non")
+colnames(m9) <- c("brun",  "jaune_beige","rouge")
+View(m9)
+#on considere plat 
+m10<-matrix(c(0,0,2,1),nrow=2,byrow=TRUE)
+rownames(m10) <- c("oui","non")
+colnames(m10) <- c("epaisse",  "fine")
+View(m10)
+m11<-matrix(c(1,1,0,0,1,0),nrow=2,byrow=TRUE)
+rownames(m11) <- c("oui","non")
+colnames(m11) <- c("brun",  "jaune_beige","rouge")
+View(m11)
