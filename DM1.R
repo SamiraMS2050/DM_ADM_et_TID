@@ -85,8 +85,6 @@ sum(f)
 print(f)
 #calcul de hc
 #D'abord calculons les entropies de chacune des variables
-View(C1)
-nrow(C1)
 HC=0
 for (i in c(1:6)){
   HC<-HC-sum((x[i,2])/somme)*log(sum(x[i,2]/somme))
@@ -406,16 +404,16 @@ recodage_table <- data.frame(R_i, IYR_i)
 View(recodage_table)
 #---------EXO3----------
 Espèce<-c("a","b","c","d","e","f","g","h","i","j")
-Comestible<-c("o","o","o","o","o","n","n","n","n","n")
-Chapeau<-c("a","a","a","pl","pl","po","po","po","a","pl")
-Tige<-c("e","e","e","f","f","f","f","e","f","f")
-Couleur<-c("b","j","b","j","b","r","j","r","j","j")
-TAB<-data.frame(Espèce,Comestible,Chapeau,Tige,Couleur)
+X1<-c("o","o","o","o","o","n","n","n","n","n")
+X2<-c("a","a","a","pl","pl","po","po","po","a","pl")
+X3<-c("e","e","e","f","f","f","f","e","f","f")
+X4<-c("b","j","b","j","b","r","j","r","j","j")
+TAB<-data.frame(Espèce,X1,X2,X3,X4)
 View(TAB)
 m<-matrix(c(3,2,0,1,1,3),nrow=2,byrow=TRUE)
 rownames(m) <- c("oui","non")
 colnames(m) <- c("arrondi",  "plat","pointu")
-View(m)
+print(m)
 m1<-matrix(c(3,2,1,4),nrow=2,byrow=TRUE)
 rownames(m1) <- c("oui","non")
 colnames(m1) <- c("epaisse",  "fine")
@@ -423,15 +421,15 @@ View(m1)
 m2<-matrix(c(3,2,0,0,3,2),nrow=2,byrow=TRUE)
 rownames(m2) <- c("oui","non")
 colnames(m2) <- c("brun",  "jaune_beige","rouge")
-View(m2)
+print(m2)
 m3<-matrix(c(3,1,0,3,1,2),nrow=3,byrow=TRUE)
 rownames(m3) <- c("arrondi","plat","pointu")
 colnames(m3) <- c("epaisse",  "fine")
-View(m3)
+print(m3)
 m4<-matrix(c(2,2,0,1,2,0,0,1,2),nrow=3,byrow=TRUE)
 rownames(m4) <- c("arrondi","plat","pointu")
 colnames(m4) <- c("brun",  "jaune_beige","rouge")
-View(m4)
+print(m4)
 m5<-matrix(c(2,1,1,1,4,1),nrow=2,byrow=TRUE)
 colnames(m5) <- c("brun",  "jaune_beige","rouge")
 rownames(m5) <- c("epaisse",  "fine")
@@ -441,10 +439,118 @@ library(infotheo)
 
 # Exemple de deux variables
 # Calcul de l'information mutuelle
-mi <- mutinformation(discretize(f), discretize(colonne))
-print(mi)
-HC
-mi <- mutinformation(AC$categories, AC$age)
-print(mi)
+#calcul des entropies
+HX1<- -2*(0.5*log(0.5))
+HX2<- -(0.4*log(0.4)+2*0.3*log(0.3))
+HX3<- -(0.4*log(0.4)+0.6*log(0.6))
+HX4<- -(0.3*log(0.3)+0.2*log(0.2)+0.5*log(0.5))             
+HX1X2<- -(0.6*log(0.3)+0.2*log(0.1)+0.2*log(0.2))
+HX1X3=0
+for (i in c(1,2)){
+  for (j in 1:2) {
+    HX1X3<-HX1X3-(m1[i,j]/10)*log(m1[i,j]/10)
+  }
+}
+HX1X4<- -(0.6*log(0.3)+0.4*log(0.2))
+HX2X3<- -(0.6*log(0.3)+0.2*log(0.2)+0.2*log(0.1))
+HX2X4<- -(0.8*log(0.2)+0.2*log(0.1))
+HX3X4=0
+for (i in c(1,2)){
+  for (j in 1:3) {
+    HX3X4<-HX3X4-(m5[i,j]/10)*log(m5[i,j]/10)
+  }
+}
+IX1X2<-HX1+HX2-HX1X2
+IX1X3<-HX1+HX3-HX1X3
+IX1X4<-HX1+HX4-HX1X4
+IX2X3<-HX2+HX3-HX2X3
+IX2X4<-HX2+HX4-HX2X4
+IX3X4<-HX3+HX4-HX3X4
+IX1X2
+IX1X3
+IX1X4
+IX2X3
+IX2X4
+IX3X4
+IX1<-IX1X2+IX1X3+IX1X4
+IX2=IX2X3+IX1X2+IX2X4
+IX3=IX1X3+IX2X3+IX3X4
+IX4=IX1X4+IX2X4+IX3X4
+IX1
+IX2
+IX3
+IX4
+#on considere arrondi
+m6<-matrix(c(3,0,0,1),nrow=2,byrow=TRUE)
+rownames(m6) <- c("oui","non")
+colnames(m6) <- c("epaisse",  "fine")
+print(m6)
+m7<-matrix(c(2,1,0,0,1,0),nrow=2,byrow=TRUE)
+rownames(m7) <- c("oui","non")
+colnames(m7) <- c("brun",  "jaune_beige","rouge")
+print(m7)
+m8a<-matrix(c(2,1,0,0,1,0),nrow=2,byrow=TRUE)
+colnames(m8a) <- c("brun",  "jaune_beige","rouge")
+rownames(m8a) <- c("epaisse",  "fine")
+print(m8a)
+HX1a<- -(0.3*log(0.3)+0.1*log(0.1))
+HX3a<- -(0.3*log(0.3)+0.1*log(0.1))
+HX4a<- -(0.2*log(0.2)+0.2*log(0.2))
+HX1X3a<- -(0.3*log(0.3)+0.1*log(0.1))
+HX1X4a<- -(0.2*log(0.2)+0.2*log(0.1))
+HX3X4a<- -(0.2*log(0.2)+0.2*log(0.1))
+IX1X3a<-HX1a+HX3a-HX1X3a
+IX1X4a<-HX1a+HX4a-HX1X4a
+IX3X4a<-HX3a+HX4a-HX3X4a
+IX1X4a
+IX1X3a
+IX1a=IX1X4a+IX1X3a
+IX1a
+IX3a=IX3X4a+IX1X3a
+IX3a
+IX4a=IX3X4a+IX1X4a
+IX4a
+#on considere pointu
+m8<-matrix(c(0,0,1,2),nrow=2,byrow=TRUE)
+rownames(m8) <- c("oui","non")
+colnames(m8) <- c("epaisse",  "fine")
+print(m8)
+m9<-matrix(c(0,0,0,0,1,2),nrow=2,byrow=TRUE)
+rownames(m9) <- c("oui","non")
+colnames(m9) <- c("brun",  "jaune_beige","rouge")
+View(m9)
+m9a<-matrix(c(0,0,1,0,1,1),nrow=2,byrow=TRUE)
+colnames(m9a) <- c("brun",  "jaune_beige","rouge")
+rownames(m9a) <- c("epaisse",  "fine")
+print(m9a)
 
-nrow(f)
+#on considere plat 
+m10<-matrix(c(0,2,0,1),nrow=2,byrow=TRUE)
+rownames(m10) <- c("oui","non")
+colnames(m10) <- c("epaisse",  "fine")
+print(m10)
+m11<-matrix(c(1,1,0,0,1,0),nrow=2,byrow=TRUE)
+rownames(m11) <- c("oui","non")
+colnames(m11) <- c("brun",  "jaune_beige","rouge")
+print(m11)
+m11a<-matrix(c(0,0,0,1,2,0),nrow=2,byrow=TRUE)
+colnames(m11a) <- c("brun",  "jaune_beige","rouge")
+rownames(m11a) <- c("epaisse",  "fine")
+print(m11a)
+HX1pl<- -(0.1*log(0.1)+0.2*log(0.2))
+HX3pl<- -(0.3*log(0.3))
+HX4pl<- -(0.1*log(0.1)+0.2*log(0.2))
+HX1X3pl<- -(0.2*log(0.2)+0.1*log(0.1))
+HX1X4pl<- -(0.3*log(0.1))
+HX3X4pl<- -(0.2*log(0.2)+0.1*log(0.1))
+IX1X3pl<-HX1pl+HX3pl-HX1X3pl
+IX1X4pl<-HX1pl+HX4pl-HX1X4pl
+IX3X4pl<-HX3pl+HX4pl-HX3X4pl
+IX1X4pl
+IX1X3pl
+IX1pl=IX1X4pl+IX1X3pl
+IX1pl
+IX3pl=IX3X4pl+IX1X3pl
+IX3pl
+IX4pl=IX3X4pl+IX1X4pl
+IX4pl
